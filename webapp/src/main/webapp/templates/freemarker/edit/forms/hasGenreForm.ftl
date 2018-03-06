@@ -119,8 +119,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <input type="button" class="submit concept-search" id="searchButton" name="searchButton" value="${i18n().search_service_btn}"/>&nbsp;
     </p>
     
-    <input type="hidden" id="objectVar" name="objectVar" value="" /> <!-- Field value populated by JavaScript -->
-    <input type="hidden" id="objectLabel" name="objectLabel" value="" />  <!-- Field value populated by JavaScript -->
+   
 	  <div id="indicator" class="hidden">
     	<img id="loadingIndicator" class="indicator" src="${urls.base}/images/indicatorWhite.gif" alt="${i18n().processing_indicator}"/>
     </div>
@@ -134,7 +133,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
   
     <div id="errors" name="errors"></div>
     
-   
+   <div id="hiddenInputs"><!--Hidden inputs created here for labels--></div>
 
 
        <p class="submit">

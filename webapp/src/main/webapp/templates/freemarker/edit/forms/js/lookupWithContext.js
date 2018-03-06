@@ -157,7 +157,7 @@ var lookupWithContext = {
 	    	return htmlAdd;
 	    }, 
 	    generateIndividualCUIInput:function(cuiURI, label, type, definedBy, broaderUris, narrowerUris) {
-	    	return 	"<input type='checkbox'  name='genreForm' value='" + cuiURI + "' label='" + 
+	    	return 	"<input type='checkbox'  name='objectVar' value='" + cuiURI + "' label='" + 
 	    		label + "' conceptType='" + type + "' conceptDefinedBy='" + definedBy + "' " +
 	    		"broaderUris='" + broaderUris + "' narrowerUris='" + narrowerUris + "'/>";
 	    },
@@ -316,7 +316,7 @@ var lookupWithContext = {
 		 e.preventDefault();
 	},
  prepareSubmit:function() {
-    	var checkedElements = $("input[name='genreForm']:checked");
+    	var checkedElements = $("input[name='objectVar']:checked");
     	if(!lookupWithContext.validateConceptSelection(checkedElements)) {
     		return false;
     	}
@@ -331,15 +331,27 @@ var lookupWithContext = {
     		var checkedElement = $(this);
     		checkedURI = checkedElement.val();
     		checkedLabel = checkedElement.attr("label");
-    		//Additional attributes can be utilized if need be    	
-    		uris.push(checkedURI);
     		labels.push(checkedLabel);
     	
     	});
-    	lookupWithContext.objectUris.val(uris);
-    	lookupWithContext.objectLabels.val(labels);
+    	//Want multiple inputs to be included
+    	//lookupWithContext.objectUris.val(uris);
+    	lookupWithContext.createObjectLabels(labels);
     	
     	return true;
+    },
+    //given array, 
+    createObjectLabels:function(labels) {
+    	var i;
+    	var len = labels.length;
+    	var inputDiv = $("#hiddenInputs");
+    	var html = "";
+    	for(i = 0; i < len; i++) {
+    		var label = labels[i];
+    		html += "<input type='hidden' name='objectLabel' value='" + label + "'>";
+    	}
+    	inputDiv.append(html);
+    	
     },
     validateConceptSelection:function(checkedElements) {
     	var numberElements = checkedElements.length;
