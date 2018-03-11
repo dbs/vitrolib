@@ -13,9 +13,9 @@
   },
   "@graph": [
     {
-      "@id": "customform:addGenreForm_dynamicN3",
+      "@id": "customform:addGenreForm_requiredN3",
       "@type": [
-        "forms:DynamicN3Pattern",
+        "forms:RequiredN3Pattern",
         "forms:FormComponent"
       ],
       "customform:pattern": [
