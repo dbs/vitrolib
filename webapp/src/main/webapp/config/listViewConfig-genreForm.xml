@@ -11,37 +11,35 @@
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;  
         PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
         
-        SELECT ?termuri 
-               ?termlabel
-               ?localName WHERE {
-               
-                ?subject ?property ?termuri .
-            
-                LET (?localName := afn:localname(?termuri)) 
-                
-            OPTIONAL { ?termuri rdfs:label ?termlabel . } 
-            
-                  
+        SELECT ?genreFormUri 
+            ?genreFormLabel
+            ?localName WHERE {
         
-        } ORDER BY  ASC( ?termlabel )  ASC( ?localName )
-    </query-select>
+            ?subject ?property ?genreFormUri .
+        
+            LET (?localName := afn:localname(?genreFormUri)) 
+        
+            OPTIONAL { ?genreFormUri rdfs:label ?genreFormLabel . } 
 
+        } ORDER BY  ASC( ?genreFormLabel )  ASC( ?localName )
+    </query-select>
+    
     <query-construct>
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;  
         PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
-
+        
         CONSTRUCT {
-            ?subject ?property ?termuri .
-            ?termuri rdfs:label ?termlabel .
+            ?subject ?property ?genreFormUri .
+            ?genreFormUri rdfs:label ?genreFormLabel .
         } WHERE {
             { 
-                ?subject ?property ?termuri . 
+                ?subject ?property ?genreFormUri . 
             } UNION {            
-				?subject ?property ?termuri . 
-            	?termuri rdfs:label ?termlabel .
+                ?subject ?property ?genreFormUri . 
+                ?genreFormUri rdfs:label ?genreFormLabel .
             }              
         }
     </query-construct>
     
-    <template>propStatement-subjectterm.ftl</template>
+    <template>propStatement-genreForm.ftl</template>
 </list-view-config>
