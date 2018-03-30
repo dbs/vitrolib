@@ -43,7 +43,8 @@
                 "forms:UriField"
             ],
             "customform:mayUseNewResource": true,
-            "customform:varName": "measurement1"
+            "customform:varName": "measurement1",
+            "customform:queryForExistingValue": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX measure: <http://measurement.bibliotek-o.org/> SELECT ?existingMeasurement WHERE { ?objectVar measure:hasMeasurement ?existingMeasurement . }  "
         },
         {
             "@id": "customform:hasMeasurementGroup_value1",
@@ -54,7 +55,8 @@
             "customform:rangeDatatypeUri": {
                 "@id": "xsd:string"
             },
-            "customform:varName": "value1"
+            "customform:varName": "value1",
+            "customform:queryForExistingValue": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX measure: <http://measurement.bibliotek-o.org/> SELECT ?existingValue WHERE { ?objectVar measure:hasMeasurement ?measurement1 . ?measurement1 rdf:value ?existingValue . }  "
         },      
         {
             "@id": "customform:hasMeasurementGroup_unit1",
@@ -66,7 +68,8 @@
                 "@id": "customform:unit1FieldOptions"
             },
             "customform:mayUseNewResource": false,
-            "customform:varName": "unit1"
+            "customform:varName": "unit1",
+            "customform:queryForExistingValue": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX measure: <http://measurement.bibliotek-o.org/> SELECT ?existingUnit WHERE { ?objectVar measure:hasMeasurement ?measurement1 . ?measurement1 measure:hasUnit ?existingUnit . }  "
         },
         {
             "@id": "customform:unit1FieldOptions",
@@ -85,7 +88,8 @@
                 "@id": "customform:dimension1FieldOptions"
             },
             "customform:mayUseNewResource": false,
-        "customform:varName": "dimension1"
+            "customform:varName": "dimension1",
+            "customform:queryForExistingValue": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX measure: <http://measurement.bibliotek-o.org/> SELECT ?existingDimension WHERE { ?objectVar measure:hasMeasurement ?measurement1 . ?measurement1 measure:measures ?existingDimension . }  "
         },
         {
             "@id": "customform:dimension1FieldOptions",
@@ -151,7 +155,7 @@
                 "@id": "customform:unit2FieldOptions"
             },
             "customform:mayUseNewResource": false,
-            "customform:varName": "unit2"
+            "customform:varName": "unit2"    
         },
         {
             "@id": "customform:unit2FieldOptions",
@@ -186,7 +190,8 @@
                 "forms:FieldDependencies"
             ],     
             "customform:dependencies": ["measurement2, value2, unit2, dimension2"]
-        },  
+        }, 
+
         {
             "@id": "customform:hasMeasurementGroup_measurement3",
             "@type": [
