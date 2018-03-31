@@ -44,7 +44,7 @@
             ],
             "customform:mayUseNewResource": true,
             "customform:varName": "measurement1",
-            "customform:queryForExistingValue": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX measure: <http://measurement.bibliotek-o.org/> SELECT ?existingMeasurement WHERE { ?objectVar measure:hasMeasurement ?existingMeasurement . }  "
+            "customform:queryForExistingValue": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX measure: <http://measurement.bibliotek-o.org/> SELECT ?existingMeasurement WHERE { ?objectVar measure:hasMeasurement ?existingMeasurement . FILTER NOT EXISTS { ?objectVar measure:hasMeasurement ?m2 FILTER ( STR(?m2) > STR(?existingMeasurement) ) } } "
         },
         {
             "@id": "customform:hasMeasurementGroup_value1",
@@ -56,7 +56,7 @@
                 "@id": "xsd:string"
             },
             "customform:varName": "value1",
-            "customform:queryForExistingValue": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX measure: <http://measurement.bibliotek-o.org/> SELECT ?existingValue WHERE { ?objectVar measure:hasMeasurement ?measurement1 . ?measurement1 rdf:value ?existingValue . }  "
+             "customform:queryForExistingValue": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX measure: <http://measurement.bibliotek-o.org/> SELECT ?existingValue WHERE { ?objectVar measure:hasMeasurement ?measurement1 . ?measurement1 rdf:value ?existingValue . FILTER NOT EXISTS { ?objectVar measure:hasMeasurement ?m2 FILTER ( STR(?m2) > STR(?measurement1) ) } } "
         },      
         {
             "@id": "customform:hasMeasurementGroup_unit1",
@@ -69,7 +69,7 @@
             },
             "customform:mayUseNewResource": false,
             "customform:varName": "unit1",
-            "customform:queryForExistingValue": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX measure: <http://measurement.bibliotek-o.org/> SELECT ?existingUnit WHERE { ?objectVar measure:hasMeasurement ?measurement1 . ?measurement1 measure:hasUnit ?existingUnit . }  "
+            "customform:queryForExistingValue": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX measure: <http://measurement.bibliotek-o.org/> SELECT ?existingUnit WHERE { ?objectVar measure:hasMeasurement ?measurement1 . ?measurement1 measure:hasUnit ?existingUnit . FILTER NOT EXISTS { ?objectVar measure:hasMeasurement ?m2 FILTER ( STR(?m2) > STR(?measurement1) ) } }  "
         },
         {
             "@id": "customform:unit1FieldOptions",
@@ -89,7 +89,7 @@
             },
             "customform:mayUseNewResource": false,
             "customform:varName": "dimension1",
-            "customform:queryForExistingValue": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX measure: <http://measurement.bibliotek-o.org/> SELECT ?existingDimension WHERE { ?objectVar measure:hasMeasurement ?measurement1 . ?measurement1 measure:measures ?existingDimension . }  "
+            "customform:queryForExistingValue": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX measure: <http://measurement.bibliotek-o.org/> SELECT ?existingDimension WHERE { ?objectVar measure:hasMeasurement ?measurement1 . ?measurement1 measure:measures ?existingDimension . FILTER NOT EXISTS { ?objectVar measure:hasMeasurement ?m2 FILTER ( STR(?m2) > STR(?measurement1) ) } }  "
         },
         {
             "@id": "customform:dimension1FieldOptions",
@@ -133,6 +133,7 @@
             ],
             "customform:mayUseNewResource": true,
             "customform:varName": "measurement2"
+        
         },
         {
             "@id": "customform:hasMeasurementGroup_value2",
@@ -143,7 +144,7 @@
             "customform:rangeDatatypeUri": {
                 "@id": "xsd:string"
             },
-            "customform:varName": "value2"
+            "customform:varName": "value2"       
         },      
         {
             "@id": "customform:hasMeasurementGroup_unit2",
@@ -155,7 +156,7 @@
                 "@id": "customform:unit2FieldOptions"
             },
             "customform:mayUseNewResource": false,
-            "customform:varName": "unit2"    
+            "customform:varName": "unit2"                        
         },
         {
             "@id": "customform:unit2FieldOptions",
@@ -174,7 +175,7 @@
                 "@id": "customform:dimension2FieldOptions"
             },
             "customform:mayUseNewResource": false,
-            "customform:varName": "dimension2"
+            "customform:varName": "dimension2"            
         },
         {
             "@id": "customform:dimension2FieldOptions",
