@@ -1,0 +1,111 @@
+= Installing and configuring Vitro and VitroLib = 
+
+Vitro is a linked open data editor, originally built for use with the Vivo
+research and scholarship project. VitroLib builds on Vitro to provide an
+editor for libraries focused on original RDF cataloguing, and is one of the
+outcomes of the Linked Data For Libraries / Linked Data For Production
+Mellon-funded projects.
+
+== Prerequisites ==
+
+* MariaDB or MySQL
+* Tomcat
+* git
+* maven
+
+== Installing vitro ==
+
+Clone and install vitro's packages to your local maven repository:
+
+  cd ~
+  git clone git@github.com:ld4l-labs/Vitro.git vitro
+  cd vitro
+  git checkout -b develop develop
+  mvn install
+
+== Installing VitroLib ==
+
+Clone VitroLib:
+
+  cd ~
+  git clone git@github.com:ld4l-labs/vitrolib.git
+  cd vitrolib
+
+Create a copy of the VitroLib installation settings, and edit the file,
+pointing to the locations where you want VitroLib to be installed
+(`<vitrolib-home-dir>`) and where the tomcat webapp should be installed
+(`<tomcat-dir>`):
+
+  cp installer/example-settings.xml installer-settings.xml
+  $EDITOR installer-settings.xml
+
+For the purposes of this documentation, we will use a `<vitrolib-home-dir>`
+value of `/srv/vitrolib/` and a `<tomcat-dir>` of `/srv/tomcat/webapps`.
+
+== Create the MariaDB or MySQL database ==
+
+Connect to the MariaDB or MySQL database server as the root user. Check your
+operating system for any special requirements to connect to the database
+server:
+
+  mysql -u root
+
+Once connected, create the VitroLib database with the UTF-8 character set:
+
+  CREATE DATABASE vitrolib CHARACTER SET utf8;
+  
+Then create the database user and grant them access (change the username and
+password to something unique to your system):
+
+  GRANT ALL ON vitrolib.* TO 'vitrolibUser'@'localhost' IDENTIFIED BY 'vitrolibPass';
+
+Finally, end your connection to MariaDB:
+
+  quit;
+
+== Configure VitroLib ==
+
+Copy the example VitroLib application setup file. You are unlikely to want to
+edit this for a default install.
+
+  cd /srv/vitrolib/home
+  cp config/example.applicationSetup.n3 config/applicationSetup.n3
+
+Copy the example VitroLib runtime properties file into your VitroLib home
+directory and edit it to:
+
+  * ensure the database connectivity parameters
+    (`VitroConnection.DataSource.*`) match what you specified when you created
+    the database
+  * set the default namespace `Vitro.defaultNamespace` to something relevant to your instance
+  * set the site administrator email address `rootUser.emailAddress`
+
+For a production instance, edit the parameters controlling email notifications and other settings:
+
+  cd /srv/vitrolib/home
+  cp config/example.runtime.properties runtime.properties
+  $EDITOR config/runtime.properties
+
+== Add the webapps to your Tomcat instance ==
+
+Create a symbolic link from your VitroLib webapps to your Tomcat instance
+webapps directory. For example, if your Tomcat instance lives at
+`~/apache-tomcat/`:
+
+  cd ~/apache-tomcat/webapps/
+  ln -sf /srv/vitrolib/tomcat/webapps/* .
+
+This assumes that the Tomcat user has appropriate file access to the VitroLib
+directories. If you download and install Tomcat from http://tomcat.apache.org/
+locally under the same user account you built VitroLib, then it should just
+work.
+
+== Running VitroLib ==
+
+Start your Tomcat instance. If all goes well, you should be able to point your
+web browser at http://localhost:8080/vitrolib/ (adjust according to your hostname
+and port number for your Tomcat instance) to see the VitroLib sign-in page.
+
+To sign in as the site administrator, use the site administrator email address you
+set in `runtime.properties` with the initial password `rootPassword`. When you log
+in successfully the first time, you are required to change your password.
